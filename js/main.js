@@ -41,7 +41,7 @@ function cities(){
     
     $('#mydiv').attr('class', 'foo');
     
-    $('#mydiv').css('color', 'red');
+    $('#mydiv').css('color', 'orange');
 
     $('#mydiv').css({
         'font-size': '2em',
@@ -54,6 +54,13 @@ function cities(){
     $('script').each(function(){
         var thesource = $(this).attr('src');
         $('#mydiv').append(thesource);
+    });
+
+    $('table').on('click', function(){
+    	alert('Madison Rocks! Go Badgers!');
+    });
+    $('table').click(function(){
+    	alert('Visit Superior and see the big lake!');
     });
 };
 
