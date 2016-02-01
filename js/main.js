@@ -1,10 +1,11 @@
-console.log("Hello World")
+
 function initialize(){
 	cities();
+
 	addColumns();
+
 	addEvents();
 };
-
 function cities(){
 	var cityPop = [
 	{
@@ -79,16 +80,18 @@ function cities(){
     });
     $('table').click(function(){
     	alert('Visit Superior and see the big lake!');
-    });
+	 });
 	
-   function addColumns(cityPop){
+function addColumns(){
+		cities.cityPop = cityPop
     
     $('tr').each(function(i){
 
-    	if (i == 0){
+    	if (i = 0){
 
-    		$(this).append('<th>' + citySize + '</th>');
-    	} else {
+    		$(this).append('<th> City Size </th>');
+    	} 
+    	else {
 
     		var citySize;
 
@@ -102,14 +105,15 @@ function cities(){
     			citySize = 'Large';
     		};
 
-    		$(this).append('<td>' + citySize + '</td>');
+    		$('table').append('<td>' + citySize + '</td>');
     	};
     });
 }
 
-function addEvents(){
+	function addEvents(){
 
-	$('#table').mouseover(function(){
+
+	$('table').mouseover(function(){
 		
 		var color = "rgb(";
 
