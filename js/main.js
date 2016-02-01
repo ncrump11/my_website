@@ -1,5 +1,8 @@
+console.log("Hello World")
 function initialize(){
 	cities();
+	addColumns();
+	addEvents();
 };
 
 function cities(){
@@ -19,8 +22,23 @@ function cities(){
 	{
 		city: 'Superior',
 		population: 27244
-	}
-	];
+	},
+	{
+		city: 'Kenosha',
+		population: 99218
+	},
+	{	city: 'Wausau',
+		population: 39106
+	},
+	{	city: 'Baraboo',
+		population: 12048
+	},
+	{	city: 'Portage',
+		population: 10324
+	},
+	{	city: 'Appleton',
+		population: 66083
+	}];
 
 
 	$("#mydiv").append("<table>");
@@ -62,6 +80,63 @@ function cities(){
     $('table').click(function(){
     	alert('Visit Superior and see the big lake!');
     });
+	
+   function addColumns(cityPop){
+    
+    $('tr').each(function(i){
+
+    	if (i == 0){
+
+    		$(this).append('<th>' + citySize + '</th>');
+    	} else {
+
+    		var citySize;
+
+    		if (cityPop[i-1].population < 100000){
+    			citySize = 'Small';
+
+    		} else if (cityPop[i-1].population < 500000){
+    			citySize = 'Medium';
+
+    		} else {
+    			citySize = 'Large';
+    		};
+
+    		$(this).append('<td>' + citySize + '</td>');
+    	};
+    });
+}
+
+function addEvents(){
+
+	$('#table').mouseover(function(){
+		
+		var color = "rgb(";
+
+		for (var i=0; i<3; i++){
+
+			var random = Math.round(Math.random() * 255);
+
+			color += "random";
+
+			if (i<2){
+				color += ",";
+			
+			} else {
+				color += ")";
+		};
+
+		$(this).css('color', color);
+	};
+}
+)}
+
+	function clickme(){
+
+		alert('Hey, you clicked me!');
+	};
+
+	$('table').on('click', clickme);
 };
 
-$(document).ready(initialize);
+$(document).ready(initialize)
