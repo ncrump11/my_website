@@ -5,25 +5,10 @@ function initialize(){
 	addColumns();
 
 	addEvents();
+
+	clickme();
 };
-function cities(){
-	var cityPop = [
-	{
-		city: 'Madison',
-		population: 233209
-	},
-	{
-		city: 'Milwaukee',
-		population: 594833
-	},
-	{
-		city: 'Green Bay',
-		population: 104057
-	},
-	{
-		city: 'Superior',
-		population: 27244
-	},
+var cityPop = [
 	{
 		city: 'Kenosha',
 		population: 99218
@@ -40,9 +25,8 @@ function cities(){
 	{	city: 'Appleton',
 		population: 66083
 	}];
-
-
-	$("#mydiv").append("<table>");
+function cities(){
+		$("#mydiv").append("<table>");
 
 	$("table").append("<tr>");
 
@@ -81,10 +65,9 @@ function cities(){
     $('table').click(function(){
     	alert('Visit Superior and see the big lake!');
 	 });
-	
-function addColumns(){
-		cities.cityPop = cityPop
-    
+	}
+function addColumns(){	
+    console.log('hello world')
     $('tr').each(function(i){
 
     	if (i = 0){
@@ -105,7 +88,7 @@ function addColumns(){
     			citySize = 'Large';
     		};
 
-    		$('table').append('<td>' + citySize + '</td>');
+    		$(this).append('<td>' + citySize + '</td>');
     	};
     });
 }
@@ -121,7 +104,8 @@ function addColumns(){
 
 			var random = Math.round(Math.random() * 255);
 
-			color += "random";
+			color += random;
+			console.log(color)
 
 			if (i<2){
 				color += ",";
@@ -141,6 +125,6 @@ function addColumns(){
 	};
 
 	$('table').on('click', clickme);
-};
+
 
 $(document).ready(initialize)
