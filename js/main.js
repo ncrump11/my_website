@@ -3,12 +3,15 @@ function initialize(){
 	cities();
     addEvents();
     clickme();
-	addColumns();
+	
 	
 };
 //this creates an array of our cities and populations
 //this is a global variable
-var cityPop = [
+
+//this function creates the table for City and Population
+function cities(){   
+    var cityPop = [
         {   
             city: 'Gothenburg',
             population: 491630
@@ -26,9 +29,6 @@ var cityPop = [
             population: 618683
         }
     ];
-//this function creates the table for City and Population
-function cities(){   
-
     //this command creates a table in our div
 	$("#mydiv").append("<table>");
 
@@ -47,40 +47,42 @@ function cities(){
         var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td><tr>";	
 		$("table").append(rowHtml);
 	};
+    // //this function adds the column City Size to our table
+    // function addColumns(cityPop){
+    //     //the each command loops through our cityPop array
+    //     //in a more efficient way than a for loop would
+    //     $('tr').each(function(i){
+    //         //this if statement adds the header city Size to our table
+    //         //if i == 0
+    //         if (i == 0){
+    //            $(this).append('<th>City Size</th>');
+    //         } else {
+    //             //the variable citySize is created to loop through
+    //             //each cityPop population and determine if it is 
+    //             //within the parameters for small, medium or large
+    //             var citySize;
+    //             console.log(cityPop[i-1]);
+    //             if (cityPop[i-1].population < 100000){
+    //                 citySize = 'Small';
+
+    //             } else if (cityPop[i-1].population < 500000){
+    //                 citySize = 'Medium';
+
+    //             } else {
+    //                 citySize = 'Large';
+    //             };
+    //             //when the loop decides which population is what
+    //             //size, it then adds that size identifier to the table
+    //             $(this).append('<td>' + citySize + '</td>');
+    //         };
+    //     });
+    // };
+    // addColumns(cityPop);
 };
-//this function adds the column City Size to our table
-function addColumns(){
-    //the each command loops through our cityPop array
-    //in a more efficient way than a for loop would
-    $('tr').each(function(i){
-        //this if statement adds the header city Size to our table
-        //if i == 0
-    	if (i == 0){
-    	   $(this).append('<th>City Size</th>');
-    	} else {
-    		//the variable citySize is created to loop through
-            //each cityPop population and determine if it is 
-            //within the parameters for small, medium or large
-    		var citySize;
 
-    		if (cityPop[i-1].population < 100000){
-                citySize = 'Small';
-
-    		} else if (cityPop[i-1].population < 500000){
-    			citySize = 'Medium';
-
-    		} else {
-    			citySize = 'Large';
-    		};
-            //when the loop decides which population is what
-            //size, it then adds that size identifier to the table
-    		$(this).append('<td>' + citySize + '</td>');
-    	};
-    });
-};
-    //this function causes the table to change color
-    //when you move your mouse over it
-	function addEvents(){
+//this function causes the table to change color
+//when you move your mouse over it
+function addEvents(){
 
     //this defines the mouseover function
 	$('table').mouseover(function(){
@@ -110,9 +112,9 @@ function addColumns(){
 		$(this).css('color', color);
 	   };
     })
-    }
-    //this function adds a click event listener
-	function clickme(){
+}
+//this function adds a click event listener
+function clickme(){
 
     //this will pop up when the table is clicked
 	alert('Hey, you clicked me!');
@@ -123,3 +125,25 @@ function addColumns(){
 //this will call the initialize function when the page
 //is loaded, so that nothing loads before the website itself
 $(document).ready(initialize);
+
+
+
+
+//define AJAX function
+function jQueryAjax(){
+    //basic jQuery ajax method
+    $.ajax('data/madison.geojson', {
+        dataType: "json",
+        success: callback
+    });
+};
+    
+
+
+//define callback function
+function callback(response, status, jqXHRobject){
+    //tasks using the data go here
+    console.log(response);
+};
+$(document).ready(jQueryAjax)
+
