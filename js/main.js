@@ -1,139 +1,133 @@
-
+//this function begins the function process when the webpage loads
 function initialize(){
 	cities();
-
+    addEvents();
+    clickme();
 	addColumns();
-
-	// addEvents();
-
-	// clickme();
+	
 };
+//this creates an array of our cities and populations
+//this is a global variable
 var cityPop = [
-	{
-		city: 'Kenosha',
-		population: 99218
-	},
-	{	city: 'Wausau',
-		population: 39106
-	},
-	{	city: 'Baraboo',
-		population: 12048
-	},
-	{	city: 'Portage',
-		population: 10324
-	},
-	{	city: 'Appleton',
-		population: 66083
-	},
-	{	city: 'Milwaukee',
-		population: 594833
+        {
+            city: 'Kenosha',
+            population: 99218
+        },
+        {   
+            city: 'Wausau',
+            population: 39106
+        },
+        {   
+            city: 'Baraboo',
+            population: 12048
+        },
+        {   
+            city: 'Portage',
+            population: 10324
+        },
+        {   
+            city: 'Appleton',
+            population: 66083
+        },
+        {   
+            city: 'Milwaukee',
+            population: 594833
+        }
+    ];
+//this function creates the table for City and Population
+function cities(){   
 
-	}];
-function cities(){
-		$("#mydiv").append("<table>");
+    //this command creates a table in our div
+	$("#mydiv").append("<table>");
 
+    //this command adds a row to our table
 	$("table").append("<tr>");
 
+    //this command adds a header row to our table
+    //with our City and Population titles
 	$("tr").append("<th>City</th><th>Population</th>");
-	$("tr").append("<th>City Size</th>")
-
+	
+    //this for loop takes each city and population from the cityPop
+    //array and adds it to our table columns
 	for (var i = 0; i < cityPop.length; i++){
-		var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td><tr>"	
+		//the variable rowHtml is made because otherwise
+        //our command would be too long to read easily
+        var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td><tr>";	
 		$("table").append(rowHtml);
 	};
-	 var theid = $('#mydiv').attr('id');
-
-   
-    // $('#mydiv').append(theid);
-
-    
-    $('#mydiv').attr('class', 'foo');
-    
-    $('#mydiv').css('color', 'orange');
-
-    // $('#mydiv').css({
-    //     'font-size': '2em',
-    //     'text-align': 'left'
-    // });
-
-    // var thecolor = $('#mydiv').css('color');
-    // $('#mydiv').append(thecolor);
-
-    // $('script').each(function(){
-    //     var thesource = $(this).attr('src');
-    //     $('#mydiv').append(thesource);
-    // });
-
-  //   $('table').on('click', function(){
-  //   	alert('Madison Rocks! Go Badgers!');
-  //   });
-  //   $('table').click(function(){
-  //   	alert('Visit Superior and see the big lake!');
-	 // });
-	}
+};
+//this function adds the column City Size to our table
 function addColumns(){
-
-
+    //the each command loops through our cityPop array
+    //in a more efficient way than a for loop would
     $('tr').each(function(i){
-
-    	console.log(cityPop[i])
-
-    	// if (i=0){
-
-    	// 	$('tr').append('<th> City Size </th>');
-    	// } 
-    	// else {
-    		var pop = cityPop[i].population
-    		// console.log(pop)
+        //this if statement adds the header city Size to our table
+        //if i == 0
+    	if (i == 0){
+    	   $(this).append('<th>City Size</th>');
+    	} else {
+    		//the variable citySize is created to loop through
+            //each cityPop population and determine if it is 
+            //within the parameters for small, medium or large
     		var citySize;
 
-    		if (pop < 100000){
-    			citySize = 'Small';
+    		if (cityPop[i-1].population < 100000){
+                citySize = 'Small';
 
-    		} else if (pop < 500000){
+    		} else if (cityPop[i-1].population < 500000){
     			citySize = 'Medium';
 
     		} else {
     			citySize = 'Large';
     		};
-    		// console.log(citySize)
-    		$(this).append('<tr><td>' + citySize + '</td><tr>');
-    	// };
+            //when the loop decides which population is what
+            //size, it then adds that size identifier to the table
+    		$(this).append('<td>' + citySize + '</td>');
+    	};
     });
-}
+};
+    //this function causes the table to change color
+    //when you move your mouse over it
+	function addEvents(){
 
-// 	function addEvents(){
-
-
-// 	$('table').mouseover(function(){
+    //this defines the mouseover function
+	$('table').mouseover(function(){
 		
-// 		var color = "rgb(";
+		var color = "rgb(";
+        //this for loop creates the variable random and
+        //fills it with a random number of the RGB spectrum
+		for (var i=0; i<3; i++){
 
-// 		for (var i=0; i<3; i++){
+			var random = Math.round(Math.random() * 255);
+            //this adds the randomized number to the variable
+            //color, which formats it in the proper color format
+			color += random;
 
-// 			var random = Math.round(Math.random() * 255);
+            //this adds a second random number to the color variable
+			if (i<2){
+				color += ",";
+			//this adds the final number to the variable, creating a
+            //real RGB color
+			} else{
+				color += ")";
+		};
+        //we have then added this color to the table's color
+        //feature, since it is in proper RGB format. The mouseover
+        //function means that this color will change randomly each
+        //time your mouse moves over the table
+		$(this).css('color', color);
+	   };
+    })
+    }
+    //this function adds a click event listener
+	function clickme(){
 
-// 			color += random;
-// 			console.log(color)
-
-// 			if (i<2){
-// 				color += ",";
-			
-// 			} else{
-// 				color += ")";
-// 		};
-
-// 		$(this).css('color', color);
-// 	};
-// }
-// )}
-
-// 	function clickme(){
-
-// 	alert('Hey, you clicked me!');
-
-// 	$('table').on('click', clickme);
+    //this will pop up when the table is clicked
+	alert('Hey, you clicked me!');
+    //this turns on the click listener
+	$('table').on('click', clickme);
 	
-// };
-
-$(document).ready(initialize)
+};
+//this will call the initialize function when the page
+//is loaded, so that nothing loads before the website itself
+$(document).ready(initialize);
