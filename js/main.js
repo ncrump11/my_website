@@ -9,29 +9,21 @@ function initialize(){
 //this creates an array of our cities and populations
 //this is a global variable
 var cityPop = [
-        {
-            city: 'Kenosha',
-            population: 99218
+        {   
+            city: 'Gothenburg',
+            population: 491630
         },
         {   
-            city: 'Wausau',
-            population: 39106
+            city: 'Helsinki',
+            population: 599676
         },
         {   
-            city: 'Baraboo',
-            population: 12048
+            city: 'Oshkosh',
+            population: 66778
         },
         {   
-            city: 'Portage',
-            population: 10324
-        },
-        {   
-            city: 'Appleton',
-            population: 66083
-        },
-        {   
-            city: 'Milwaukee',
-            population: 594833
+            city: 'Oslo',
+            population: 618683
         }
     ];
 //this function creates the table for City and Population
