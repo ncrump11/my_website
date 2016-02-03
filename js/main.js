@@ -4,9 +4,9 @@ function initialize(){
 
 	addColumns();
 
-	addEvents();
+	// addEvents();
 
-	clickme();
+	// clickme();
 };
 var cityPop = [
 	{
@@ -24,6 +24,10 @@ var cityPop = [
 	},
 	{	city: 'Appleton',
 		population: 66083
+	},
+	{	city: 'Milwaukee',
+		population: 594833
+
 	}];
 function cities(){
 		$("#mydiv").append("<table>");
@@ -31,6 +35,7 @@ function cities(){
 	$("table").append("<tr>");
 
 	$("tr").append("<th>City</th><th>Population</th>");
+	$("tr").append("<th>City Size</th>")
 
 	for (var i = 0; i < cityPop.length; i++){
 		var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td><tr>"	
@@ -39,92 +44,96 @@ function cities(){
 	 var theid = $('#mydiv').attr('id');
 
    
-    $('#mydiv').append(theid);
+    // $('#mydiv').append(theid);
 
     
     $('#mydiv').attr('class', 'foo');
     
     $('#mydiv').css('color', 'orange');
 
-    $('#mydiv').css({
-        'font-size': '2em',
-        'text-align': 'left'
-    });
+    // $('#mydiv').css({
+    //     'font-size': '2em',
+    //     'text-align': 'left'
+    // });
 
-    var thecolor = $('#mydiv').css('color');
-    $('#mydiv').append(thecolor);
+    // var thecolor = $('#mydiv').css('color');
+    // $('#mydiv').append(thecolor);
 
-    $('script').each(function(){
-        var thesource = $(this).attr('src');
-        $('#mydiv').append(thesource);
-    });
+    // $('script').each(function(){
+    //     var thesource = $(this).attr('src');
+    //     $('#mydiv').append(thesource);
+    // });
 
-    $('table').on('click', function(){
-    	alert('Madison Rocks! Go Badgers!');
-    });
-    $('table').click(function(){
-    	alert('Visit Superior and see the big lake!');
-	 });
+  //   $('table').on('click', function(){
+  //   	alert('Madison Rocks! Go Badgers!');
+  //   });
+  //   $('table').click(function(){
+  //   	alert('Visit Superior and see the big lake!');
+	 // });
 	}
-function addColumns(){	
-    console.log('hello world')
+function addColumns(){
+
+
     $('tr').each(function(i){
 
-    	if (i = 0){
+    	console.log(cityPop[i])
 
-    		$(this).append('<th> City Size </th>');
-    	} 
-    	else {
+    	// if (i=0){
 
+    	// 	$('tr').append('<th> City Size </th>');
+    	// } 
+    	// else {
+    		var pop = cityPop[i].population
+    		// console.log(pop)
     		var citySize;
 
-    		if (cityPop[i-1].population < 100000){
+    		if (pop < 100000){
     			citySize = 'Small';
 
-    		} else if (cityPop[i-1].population < 500000){
+    		} else if (pop < 500000){
     			citySize = 'Medium';
 
     		} else {
     			citySize = 'Large';
     		};
-
-    		$(this).append('<td>' + citySize + '</td>');
-    	};
+    		// console.log(citySize)
+    		$(this).append('<tr><td>' + citySize + '</td><tr>');
+    	// };
     });
 }
 
-	function addEvents(){
+// 	function addEvents(){
 
 
-	$('table').mouseover(function(){
+// 	$('table').mouseover(function(){
 		
-		var color = "rgb(";
+// 		var color = "rgb(";
 
-		for (var i=0; i<3; i++){
+// 		for (var i=0; i<3; i++){
 
-			var random = Math.round(Math.random() * 255);
+// 			var random = Math.round(Math.random() * 255);
 
-			color += random;
-			console.log(color)
+// 			color += random;
+// 			console.log(color)
 
-			if (i<2){
-				color += ",";
+// 			if (i<2){
+// 				color += ",";
 			
-			} else {
-				color += ")";
-		};
+// 			} else{
+// 				color += ")";
+// 		};
 
-		$(this).css('color', color);
-	};
-}
-)}
+// 		$(this).css('color', color);
+// 	};
+// }
+// )}
 
-	function clickme(){
+// 	function clickme(){
 
-		alert('Hey, you clicked me!');
-	};
+// 	alert('Hey, you clicked me!');
 
-	$('table').on('click', clickme);
-
+// 	$('table').on('click', clickme);
+	
+// };
 
 $(document).ready(initialize)
