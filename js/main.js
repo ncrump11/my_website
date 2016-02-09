@@ -167,7 +167,7 @@ function debugAjax(){
             //to simply perform the code within the debugCallback function
             //within the success function. If we wanted to pass the data to
             //an outside function however, we would simply call that function
-            //here
+            //here. this command creates a string from the data and adds it to the div
             $('#mydiv').append('<br>GeoJSON data:<br>' + JSON.stringify(mydata));
         }
     });
