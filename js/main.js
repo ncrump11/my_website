@@ -1,10 +1,13 @@
 //this function begins the function process when the webpage loads
 function initialize(){
-	cities();
+    cities();
     addEvents();
     clickme();
-	
-	
+    // addColumns();
+    jQueryAjax();
+    debugAjax();
+    
+    
 };
 //this creates an array of our cities and populations
 //this is a global variable
@@ -30,23 +33,23 @@ function cities(){
         }
     ];
     //this command creates a table in our div
-	$("#mydiv").append("<table>");
+    $("#mydiv").append("<table>");
 
     //this command adds a row to our table
-	$("table").append("<tr>");
+    $("table").append("<tr>");
 
     //this command adds a header row to our table
     //with our City and Population titles
-	$("tr").append("<th>City</th><th>Population</th>");
-	
+    $("tr").append("<th>City</th><th>Population</th>");
+    
     //this for loop takes each city and population from the cityPop
     //array and adds it to our table columns
-	for (var i = 0; i < cityPop.length; i++){
-		//the variable rowHtml is made because otherwise
+    for (var i = 0; i < cityPop.length; i++){
+        //the variable rowHtml is made because otherwise
         //our command would be too long to read easily
-        var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td><tr>";	
-		$("table").append(rowHtml);
-	};
+        var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td><tr>"; 
+        $("table").append(rowHtml);
+    };
     // //this function adds the column City Size to our table
     // function addColumns(cityPop){
     //     //the each command loops through our cityPop array
@@ -85,65 +88,87 @@ function cities(){
 function addEvents(){
 
     //this defines the mouseover function
-	$('table').mouseover(function(){
-		
-		var color = "rgb(";
+    $('table').mouseover(function(){
+        
+        var color = "rgb(";
         //this for loop creates the variable random and
         //fills it with a random number of the RGB spectrum
-		for (var i=0; i<3; i++){
+        for (var i=0; i<3; i++){
 
-			var random = Math.round(Math.random() * 255);
+            var random = Math.round(Math.random() * 255);
             //this adds the randomized number to the variable
             //color, which formats it in the proper color format
-			color += random;
+            color += random;
 
             //this adds a second random number to the color variable
-			if (i<2){
-				color += ",";
-			//this adds the final number to the variable, creating a
+            if (i<2){
+                color += ",";
+            //this adds the final number to the variable, creating a
             //real RGB color
-			} else{
-				color += ")";
-		};
+            } else{
+                color += ")";
+        };
         //we have then added this color to the table's color
         //feature, since it is in proper RGB format. The mouseover
         //function means that this color will change randomly each
         //time your mouse moves over the table
-		$(this).css('color', color);
-	   };
+        $(this).css('color', color);
+       };
     })
 }
 //this function adds a click event listener
 function clickme(){
 
     //this will pop up when the table is clicked
-	alert('Hey, you clicked me!');
+    alert('Hey, you clicked me!');
     //this turns on the click listener
-	$('table').on('click', clickme);
-	
+    $('table').on('click', clickme);
+    
 };
+
+function jQueryAjax(){
+    //define a variable to hold the data
+    var mydata;
+
+    //basic jQuery ajax method
+    $.ajax("data/MegaCities.geojson", {
+        dataType: "json",
+        success: function(response){
+            mydata = response;
+            //the data can be accessed because it is within the callback function
+            console.log(mydata)
+        }
+    });
+
+    //the data cannot be accessed here because it is outside the callback function
+    console.log(mydata)
+};
+
 //this will call the initialize function when the page
 //is loaded, so that nothing loads before the website itself
 $(document).ready(initialize);
 
-
-
-
-//define AJAX function
-function jQueryAjax(){
-    //basic jQuery ajax method
-    $.ajax('data/madison.geojson', {
-        dataType: "json",
-        success: callback
-    });
-};
     
+function debugAjax(){
+    //this creates the mydata variable
+    var mydata;
 
+    //this requests the MegaCities data from our datafolder
+    //and specifies the data type
+    $.ajax("data/MegaCities.geojson", {
+        dataType: "json",
+        //when the data is loaded, the functionis executed, which
+        //gives the mydata variable the data. 
+        success: function(response){
 
-//define callback function
-function callback(response, status, jqXHRobject){
-    //tasks using the data go here
-    console.log(response);
-};
-$(document).ready(jQueryAjax)
-
+            mydata=response;
+            
+            //rather than pass the data to an outside function, it is possible
+            //to simply perform the code within the debugCallback function
+            //within the success function. If we wanted to pass the data to
+            //an outside function however, we would simply call that function
+            //here
+            $('#mydiv').append('<br>GeoJSON data:<br>' + JSON.stringify(mydata));
+        }
+    });
+}
